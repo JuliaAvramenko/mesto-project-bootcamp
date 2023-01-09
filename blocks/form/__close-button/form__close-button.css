@@ -1,0 +1,9 @@
+.form__close-button {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    background-color: #000000;
+
+}

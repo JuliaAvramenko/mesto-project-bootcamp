@@ -1,0 +1,14 @@
+.form__field-occupation {
+    padding: 0;
+    width: 358px;
+    height: 27px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 48px;
+    opacity: 0.2;
+    border-bottom: 1px solid #000000;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}

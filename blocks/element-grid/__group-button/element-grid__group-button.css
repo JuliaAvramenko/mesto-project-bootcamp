@@ -1,0 +1,9 @@
+.element-grid__group-button {
+    width: 22px;
+    height: 19px;
+    border: none;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
