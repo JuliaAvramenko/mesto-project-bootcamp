@@ -1,7 +1,9 @@
 .footer__project {
+    padding: 0;
+    margin: 0;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
-
     color: #545454;
+    align-content: flex-start;
 }

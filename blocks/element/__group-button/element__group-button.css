@@ -1,0 +1,16 @@
+.element__group-button {
+    width: 22px;
+    height: 19px;
+    border: none;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../../images/group-button-image.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.element__group-button:hover {
+    opacity: 0.5;
+}

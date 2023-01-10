@@ -1,9 +1,13 @@
-@media (max-width: 500px) {
-    .profile__info {
-        margin-bottom: 36px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+.profile__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
+
+}
+
+@media (max-width: 590px) {
+    .profile__info {
+        align-items: center;
     }
 }

@@ -2,18 +2,19 @@
     padding: 0;
     width: 358px;
     height: 27px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0;
     margin-bottom: 30px;
-    opacity: 0.2;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid #dadada;
     border-top: none;
     border-left: none;
     border-right: none;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
+}
 
-    color: #000000;
+@media (max-width: 500px) {
+    .form__field-name {
+        width: 238px;
+        height: 27px;
+    }
 }

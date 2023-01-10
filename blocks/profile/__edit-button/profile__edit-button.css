@@ -7,5 +7,30 @@
     border: 1px solid #FFFFFF;
     justify-content: center;
     align-items: center;
+    background-image: url(../../../images/edit-button-image.svg);
+    background-size: 7px 7px;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: -42px;
+    bottom: 8px;
+}
 
+.profile__edit-button:hover {
+    opacity: 0.6;
+}
+
+
+
+@media (max-width: 720px) {
+    .profile__edit-button {
+        width: 18px;
+        height: 18px;
+        background-size: 5.25px 5.25px;
+        right: -28px;
+        bottom: 6px;
+
+    }
 }

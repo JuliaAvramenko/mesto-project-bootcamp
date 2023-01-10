@@ -1,17 +1,10 @@
 # Проект: Место
 
-### Обзор
+В проекте реализована работа с адаптивной версткой на разрешениях 1280 и 320, а также подготовлены формы для их реализации на JavaScript.
 
-* Figma
-* Картинки
+[Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 
-**Figma**
+[Ссылка на сайт]
+https://juliaavramenko.github.io/russian-travel-JUL-LIA/
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 
-**Картинки**
-
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
-
-Удачи!

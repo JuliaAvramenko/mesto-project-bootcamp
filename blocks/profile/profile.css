@@ -1,22 +1,22 @@
 .profile {
     display: flex;
     flex-direction: row;
-
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 50px;
     max-width: 880px;
     width: 100%;
-    height: 120px;
+
     justify-content: space-between;
     align-items: center;
 
 }
 
-@media (max-width: 500px) {
+@media (max-width: 590px) {
     .profile {
         justify-content: center;
         flex-wrap: wrap;
         margin-bottom: 36px;
-        height: 286px;
+        max-width: 282px;
     }
 }

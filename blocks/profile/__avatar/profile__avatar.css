@@ -2,7 +2,7 @@
     margin-right: 30px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 590px) {
     .profile__avatar {
         margin-right: 0;
         margin-bottom: 26px;
