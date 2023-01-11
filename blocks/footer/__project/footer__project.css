@@ -7,3 +7,10 @@
     color: #545454;
     align-content: flex-start;
 }
+
+@media (max-width: 500px) {
+    .footer__project {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

@@ -4,6 +4,7 @@
     flex-wrap: wrap;
     max-width: 880px;
     justify-content: center;
+    min-height: 744px;
 
 
     column-gap: 17px;
@@ -16,6 +17,7 @@
 @media (max-width: 500px) {
     .elements {
         margin-bottom: 48px;
+        min-height: 2268px;
 
     }
 }

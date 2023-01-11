@@ -5,13 +5,15 @@
     font-size: 18px;
     line-height: 22px;
     color: #FFFFFF;
+    height: 18px;
 }
 
 @media (max-width: 500px) {
-    .profile__title {
+    .profile__subtitle {
         font-size: 14px;
         line-height: 17px;
-        text-align: center;
+        height: 14px;
+
 
     }
 }
