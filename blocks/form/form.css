@@ -1,6 +1,6 @@
 .form {
-    width: 358px;
-    height: 259px;
+    max-width: 358px;
+    min-height: 259px;
     display: flex;
     flex-direction: column;
 
@@ -9,7 +9,7 @@
 
 @media (max-width: 500px) {
     .form {
-        width: 238px;
+        max-width: 238px;
 
     }
 }

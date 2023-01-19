@@ -1,7 +1,7 @@
 .form__field-name {
     padding: 0;
-    width: 358px;
-    height: 27px;
+    max-width: 358px;
+    min-height: 27px;
     margin-bottom: 30px;
     border-bottom: 1px solid #dadada;
     border-top: none;
@@ -14,7 +14,7 @@
 
 @media (max-width: 500px) {
     .form__field-name {
-        width: 238px;
-        height: 27px;
+        max-width: 238px;
+        min-height: 27px;
     }
 }

@@ -13,7 +13,7 @@
     .footer {
         padding-bottom: 36px;
         max-width: 282px;
-        height: 14px;
+        min-height: 14px;
 
     }
 }

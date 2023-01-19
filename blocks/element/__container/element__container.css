@@ -5,7 +5,7 @@
     align-items: center;
     justify-items: center;
     background-color: #FFFFFF;
-    height: 79px;
+    min-height: 79px;
     border-radius: 0px 0px 10px 10px;
     padding-right: 20px;
     padding-left: 21px;
