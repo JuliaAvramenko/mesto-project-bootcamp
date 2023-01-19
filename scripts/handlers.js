@@ -4,18 +4,29 @@ function change_popup_state(popupElem) {
 }
 
 
-let editButton = document.querySelector(".profile__edit-button");
+const editButton = document.querySelector(".profile__edit-button");
 editButton.addEventListener('click', (event) => {
-    const popupElem = document.querySelector(".form").closest(".popup");
+    const form = document.forms["form-profile-edit"]
+    const popupElem = form.closest(".popup")
     change_popup_state(popupElem);
 
 })
 
-let closeButton = document.querySelector(".popup-container__close-button")
-closeButton.addEventListener("click", (event) => {
-    const popupElem = event.target.closest(".popup");
-    change_popup_state(popupElem);
+const addButton = document.querySelector(".profile__add-button");
+addButton.addEventListener("click", (event) => {
+    const form = document.forms["form-card-add"]
+    const popupElem = form.closest(".popup")
+    change_popup_state(popupElem)
 })
+
+
+let closeButtonList = document.querySelectorAll(".popup-container__close-button")
+closeButtonList.forEach(closeButton =>
+    closeButton.addEventListener("click", (event) => {
+        const popupElem = event.target.closest(".popup");
+        change_popup_state(popupElem);
+    })
+)
 
 let submitForm = document.querySelector(".form")
 submitForm.addEventListener("submit", (event) => {
