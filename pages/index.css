@@ -25,6 +25,9 @@
 @import url(../blocks/element/element.css);
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/element/__group-button/_active/element__group-button_active.css);
+@import url(../blocks/element/__trash-button-bin/element__trash-button-bin.css);
+@import url(../blocks/element/__trash-button-cup/element__trash-button-cup.css);
+@import url(../blocks/element/__trash-button/element__trash-button.css);
 
 @import url(../blocks/footer/__project/footer__project.css);
 @import url(../blocks/footer/footer.css);
