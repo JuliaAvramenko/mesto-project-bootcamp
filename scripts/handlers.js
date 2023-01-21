@@ -49,23 +49,4 @@ submitForm.addEventListener("submit", (event) => {
 })
 
 
-const likeButtonList = document.querySelectorAll(".element__group-button");
-likeButtonList.forEach(
-    likeButton => likeButton.addEventListener("click", (event) => {
-        //console.log("hi");
-        event.target.classList.toggle("element__group-button_active")
-        //console.log(event.target);
-    })
-)
 
-const trashButtonList = document.querySelectorAll(".element__trash-button");
-trashButtonList.forEach(
-    trashButton => trashButton.addEventListener("click", (event) => {
-        //console.log("hi");
-
-        const card = event.target.closest(".element");
-        const cards = card.closest(".elements");
-        cards.removeChild(card);
-    })
-
-)
