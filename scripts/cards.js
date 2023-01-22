@@ -76,6 +76,12 @@ function clickImageHandler(event) {
     newImage.src = src;
     newImage.alt = alt;
 
+    imagePopup.querySelector(".popup-container__close-button").addEventListener("click", (event) => {
+        const image = event.target.closest('.popup').querySelector(".popup-container__image")
+
+        image.src = ''
+    })
+
 
 }
 
