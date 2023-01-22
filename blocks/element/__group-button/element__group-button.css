@@ -8,7 +8,7 @@
     align-items: center;
     background-image: url(../../../images/group-button-image.svg);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
 }
 
 .element__group-button:hover {
