@@ -22,9 +22,10 @@
                     </div>
                     <div class="profile__info">
 
-                        <h1 class="profile__title">Jul&#8209;liA&nbsp;Авраменко
+                        <div class="profile__container">
+                            <h1 class="profile__title">Jul&#8209;liA&nbsp;Авраменко</h1>
                             <button type="button" class="profile__edit-button"></button>
-                        </h1>
+                        </div>
                         <p class="profile__subtitle">Шопоголик на отдыхе</p>
                     </div>
                 </div>
@@ -107,7 +108,7 @@
 
     </div>
     <div class="popup">
-        <div class="popup-container">
+        <div class="popup-container popup-container_parameters">
             <button type="button" class="popup-container__close-button">
             </button>
             <form name="form-profile-edit" action="/profile/edit" class="form">
@@ -120,7 +121,7 @@
         </div>
     </div>
     <div class="popup">
-        <div class="popup-container">
+        <div class="popup-container popup-container_parameters">
             <button type="button" class="popup-container__close-button">
             </button>
             <form name="form-card-add" action="/card/add" class="form">
@@ -131,6 +132,15 @@
                 <button type="submit" class="form__submit-button">Создать</button>
             </form>
         </div>
+    </div>
+    <div class="popup">
+        <div class="popup-container popup-container_picture">
+            <button type="button" class="popup-container__close-button">
+            </button>
+            <img src="./images/1.jpeg" alt="красная поляна" class="popup-container__image">
+            <p class="popup-container__text">Красная поняла</p>
+        </div>
+    </div>
     </div>
     <script src="./scripts/handlers.js"></script>
     <script src="./scripts/cards.js"></script>

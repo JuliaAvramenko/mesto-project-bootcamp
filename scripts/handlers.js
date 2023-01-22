@@ -31,17 +31,20 @@ closeButtonList.forEach(closeButton =>
 let submitForm = document.querySelector(".form")
 submitForm.addEventListener("submit", (event) => {
     // Находим форму
-    let persik = event.target
+    let form = event.target
 
     // Получаем значения инпутов
-    const name = persik.querySelector(".form__field-name").value
-    const occupation = persik.querySelector(".form__field-occupation").value
+    const nameInput = form.querySelector(".form__field-name");
+    const occupationInput = form.querySelector(".form__field-occupation");
 
     // Делаем что нибудь с инпутами
-    console.log(`Name: ${name}, Occupation: ${occupation}`)
+    const oldName = document.querySelector(".profile__title");
+    const oldOccupation = document.querySelector(".profile__subtitle");
+    oldName.textContent = nameInput.value;
+    oldOccupation.textContent = occupationInput.value;
 
     // Закрываем форму
-    const popupElem = persik.closest(".popup");
+    const popupElem = form.closest(".popup");
     change_popup_state(popupElem);
 
     // Не делаем HTTP запрос

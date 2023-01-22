@@ -15,7 +15,7 @@
     padding: 0;
     position: absolute;
     right: -42px;
-    bottom: 0px;
+    bottom: 8px;
 }
 
 .profile__edit-button:hover {
@@ -30,7 +30,7 @@
         height: 18px;
         background-size: 5.25px 5.25px;
         right: -28px;
-        bottom: 0px;
+        bottom: 5px;
 
     }
 }

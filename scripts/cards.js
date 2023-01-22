@@ -1,28 +1,28 @@
 console.log("hello from cards");
 const initialCards = [
     {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+        name: 'Красная Поляна',
+        link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/images/1.jpeg'
     },
     {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+        name: 'Церковное озеро',
+        link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/images/2.jpeg'
     },
     {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+        name: 'Геленджик',
+        link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/images/3.jpeg'
     },
     {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+        name: 'Сафари Парк',
+        link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/images/4.jpeg'
     },
     {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+        name: 'Сочи',
+        link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/images/5.jpg'
     },
     {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+        name: 'Адлер',
+        link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/images/6.jpg'
     }
 ];
 
@@ -50,25 +50,49 @@ function createCard(template, name, link) {
 
 }
 
+function likeButtonHandler(event) {
+    event.target.classList.toggle("element__group-button_active")
+}
+
+function trashButtonHandler(event) {
+    const card = event.target.closest(".element");
+    const cards = card.closest(".elements");
+    cards.removeChild(card);
+}
+
+function clickImageHandler(event) {
+    // get place name
+    const src = event.target.src;
+    const alt = event.target.alt;
+    const name = event.target.closest(".element").querySelector(".element__title").textContent;
+    const image = document.querySelector(".popup-container__image");
+
+    const imagePopup = image.closest(".popup");
+    imagePopup.classList.toggle("popup_opened");
+
+    const newImage = imagePopup.querySelector(".popup-container__image");
+    const newName = imagePopup.querySelector(".popup-container__text");
+    newName.textContent = name;
+    newImage.src = src;
+    newImage.alt = alt;
+
+
+}
+
 document.addEventListener("DOMSubtreeModified", (event) => {
     const likeButtonList = document.querySelectorAll(".element__group-button");
     likeButtonList.forEach(
-        likeButton => likeButton.addEventListener("click", (event) => {
-            //console.log("hi");
-            event.target.classList.toggle("element__group-button_active")
-            //console.log(event.target);
-        })
+        likeButton => likeButton.addEventListener("click", likeButtonHandler)
     )
 
     const trashButtonList = document.querySelectorAll(".element__trash-button");
     trashButtonList.forEach(
-        trashButton => trashButton.addEventListener("click", (event) => {
-            //console.log("hi");
+        trashButton => trashButton.addEventListener("click", trashButtonHandler)
+    )
 
-            const card = event.target.closest(".element");
-            const cards = card.closest(".elements");
-            cards.removeChild(card);
-        })
+    const openImageList = document.querySelectorAll(".element__image");
+    openImageList.forEach(
+        openImage => openImage.addEventListener("click", clickImageHandler)
     )
 })
 
