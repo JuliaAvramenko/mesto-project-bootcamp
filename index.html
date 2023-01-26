@@ -32,18 +32,20 @@
 
             </section>
             <section class="elements">
-                <article class="element">
-                    <div class="element__trash-button">
-                        <div class="element__trash-button-cup"></div>
-                        <div class="element__trash-button-bin"></div>
-                    </div>
-                    <img src="./images/1.jpeg" alt="красная поляна" class="element__image">
-                    <div class="element__container">
-                        <h2 class="element__title">Красная Поляна</h2>
-                        <button class="element__group-button">
-                        </button>
-                    </div>
-                </article>
+                <template class="element-template">
+                    <article class="element">
+                        <div class="element__trash-button">
+                            <div class="element__trash-button-cup"></div>
+                            <div class="element__trash-button-bin"></div>
+                        </div>
+                        <img src="./images/1.jpeg" alt="красная поляна" class="element__image">
+                        <div class="element__container">
+                            <h2 class="element__title">Красная Поляна</h2>
+                            <button class="element__group-button">
+                            </button>
+                        </div>
+                    </article>
+                </template>
             </section>
         </main>
         <footer class="footer">
@@ -51,20 +53,19 @@
         </footer>
 
     </div>
-    <div class="popup">
+    <div class="popup profile-popup">
         <div class="popup-container popup-container_parameters">
             <button type="button" class="popup-container__close-button">
             </button>
             <form name="form-profile-edit" action="/profile/edit" class="form">
                 <h2 class="form__title">Редактировать профиль</h2>
-                <input name="form1-field-name" type="text" value="Jul-liA Авраменко" class="form__field-name">
-                <input name="form1-field-occupation" type="text" value="Шопоголик на отдыхе"
-                    class="form__field-occupation">
+                <input name="form1-field-name" type="text" class="form__field-name">
+                <input name="form1-field-occupation" type="text" class="form__field-occupation">
                 <button type="submit" class="form__submit-button">Сохранить</button>
             </form>
         </div>
     </div>
-    <div class="popup">
+    <div class="popup add-popup">
         <div class="popup-container popup-container_parameters">
             <button type="button" class="popup-container__close-button">
             </button>
@@ -77,7 +78,7 @@
             </form>
         </div>
     </div>
-    <div class="popup">
+    <div class="popup image-popup">
         <div class="popup-container popup-container_picture">
             <button type="button" class="popup-container__close-button">
             </button>
