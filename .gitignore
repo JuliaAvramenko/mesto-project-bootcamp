@@ -1,2 +1,4 @@
 figma
 *.zip
+node_modules
+dist

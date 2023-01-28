@@ -60,7 +60,9 @@
             <form name="form-profile-edit" action="/profile/edit" class="form">
                 <h2 class="form__title">Редактировать профиль</h2>
                 <input name="form1-field-name" type="text" class="form__field-name">
+                <span id="profile-name-error" class="error"></span>
                 <input name="form1-field-occupation" type="text" class="form__field-occupation">
+                <span id="occupation-error" class="error"></span>
                 <button type="submit" class="form__submit-button">Сохранить</button>
             </form>
         </div>
@@ -72,8 +74,11 @@
             <form name="form-card-add" action="/card/add" class="form">
                 <h2 class="form__title">Новое место</h2>
                 <input name="form1-field-name" type="text" placeholder="Название" class="form__field-name">
+                <span id="card-name-error" class="error"></span>
                 <input name="form1-field-occupation" type="text" placeholder="Ссылка на картинку"
                     class="form__field-occupation">
+                <span id="link-error" class="error"></span>
+
                 <button type="submit" class="form__submit-button">Создать</button>
             </form>
         </div>
