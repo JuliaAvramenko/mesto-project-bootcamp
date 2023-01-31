@@ -48,3 +48,7 @@
 @import url(../blocks/popup-container/_picture/popup-container_picture.css);
 @import url(../blocks/popup-container/__image/popup-container__image.css);
 @import url(../blocks/popup-container/__text/popup-container__text.css);
+
+@import url(../blocks/error/error.css);
+@import url(../blocks/form/_state/form_state_invalid.css);
+@import url(../blocks/form/__submit-button/_invalid/form__submit-button_invalid.css);

@@ -57,12 +57,14 @@
         <div class="popup-container popup-container_parameters">
             <button type="button" class="popup-container__close-button">
             </button>
-            <form name="form-profile-edit" action="/profile/edit" class="form">
+            <form name="form-profile-edit" action="/profile/edit" class="form" novalidate>
                 <h2 class="form__title">Редактировать профиль</h2>
-                <input name="form1-field-name" type="text" class="form__field-name">
-                <span id="profile-name-error" class="error"></span>
-                <input name="form1-field-occupation" type="text" class="form__field-occupation">
-                <span id="occupation-error" class="error"></span>
+                <input required minlength=2 maxlength=40 autocomplete="off" name="form-profile-name" type="text"
+                    class="form__field-name">
+                <span id="form-profile-name-error" class="error"></span>
+                <input required minlength=2 maxlength=200 autocomplete="off" name="form-profile-occupation" type="text"
+                    class="form__field-occupation">
+                <span id="form-profile-occupation-error" class="error"></span>
                 <button type="submit" class="form__submit-button">Сохранить</button>
             </form>
         </div>
@@ -71,13 +73,14 @@
         <div class="popup-container popup-container_parameters">
             <button type="button" class="popup-container__close-button">
             </button>
-            <form name="form-card-add" action="/card/add" class="form">
+            <form name="form-card-add" action="/card/add" class="form" novalidate>
                 <h2 class="form__title">Новое место</h2>
-                <input name="form1-field-name" type="text" placeholder="Название" class="form__field-name">
-                <span id="card-name-error" class="error"></span>
-                <input name="form1-field-occupation" type="text" placeholder="Ссылка на картинку"
+                <input required minlength=2 maxlength=30 autocomplete="off" name="form-add-name" type="text"
+                    placeholder="Название" class="form__field-name">
+                <span id="form-add-name-error" class="error"></span>
+                <input required autocomplete="off" name="form-add-link" type="url" placeholder="Ссылка на картинку"
                     class="form__field-occupation">
-                <span id="link-error" class="error"></span>
+                <span id="form-add-link-error" class="error"></span>
 
                 <button type="submit" class="form__submit-button">Создать</button>
             </form>
@@ -96,4 +99,5 @@
 
     <script src="./scripts/handlers.js"></script>
     <script src="./scripts/cards.js"></script>
+    <script src="./scripts/validation.js"></script>
 </body>

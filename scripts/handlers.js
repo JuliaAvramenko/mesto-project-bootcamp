@@ -28,6 +28,11 @@ editButton.addEventListener('click', (event) => {
 
     nameForm.value = nameProfile.textContent;
     occupationForm.value = occupationProfile.textContent;
+
+    let eventInput = new Event("input");
+
+    nameForm.dispatchEvent(eventInput);
+    occupationForm.dispatchEvent(eventInput);
 })
 
 
@@ -38,6 +43,58 @@ closeButtonList.forEach(closeButton =>
         closePopup(popupElem);
     })
 )
+
+
+const popupList = document.querySelectorAll(".popup");
+popupList.forEach(popupElement => {
+    // Обрабатываем клик за пределами попапа: 
+    // Source: https://misha.agency/javascript/klik-vne-elementa.html
+
+    const popupContainer = popupElement.querySelector(".popup-container");
+
+    popupElement.addEventListener("click", (event) => {
+        const withinBoundaries = event.composedPath().includes(popupContainer);
+
+        if (!withinBoundaries) {
+            closePopup(popupElement);
+            // div.style.display = 'none'; // скрываем элемент т к клик был за его пределами
+        }
+
+
+    })
+
+
+    // Закрываем попап по нажатию Esc
+
+    //popupElement.addEventListener("keydown", (event) => {
+    // console.log("I was here");
+    //if (event.key === "s");
+    //const popupElem = event.target.closest(".popup");
+    //closePopup(popupElem);
+    // });
+})
+
+// Закрываем попапы по нажатию Esc
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !event.repeat) {
+        //console.log("I was here");
+        const popupList = document.querySelectorAll(".popup");
+        popupList.forEach(popupElement => {
+            //console.log(popupElement);
+            if ([...popupElement.classList].includes("popup_opened")) {
+                closePopup(popupElement)
+
+            };
+            // classList.проверяет есьть элемент в массива true - выключить, в другиз - ничего
+        })
+    }
+    //if (event.key === "s");
+    //const popupElem = event.target.closest(".popup");
+    //closePopup(popupElem);
+});
+
+
+
 
 const submitForm = document.querySelector(".form")
 submitForm.addEventListener("submit", (event) => {
