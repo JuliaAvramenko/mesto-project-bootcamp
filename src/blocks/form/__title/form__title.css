@@ -5,14 +5,15 @@
     font-size: 24px;
     line-height: 29px;
     color: #000000;
-    margin-bottom: 54px;
-    
+    margin-bottom: 40px;
+    /* было 54px */
+
 }
 
 @media (max-width: 500px) {
     .form__title {
         font-size: 18px;
         line-height: 22px;
-        margin-bottom: 75px;
+        /*margin-bottom: 75px;*/
     }
 }

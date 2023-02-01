@@ -5,19 +5,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="pages/index.css" />
+
     <title>Место</title>
 </head>
 
 <body class="container">
     <div class="pages">
         <header class="header">
-            <img src="./images/mesto-logo.svg" alt="место" class="logo">
+            <img src="<%=require('./images/mesto-logo.svg')%>" alt="место" class="logo">
         </header>
         <main>
             <section class="profile">
                 <div class="profile__main-info">
-                    <img src="./images/logo.jpeg" alt="бирка" class="profile__image">
+                    <img src="<%=require('./images/logo.jpeg')%>" alt="бирка" class="profile__image">
 
                     <div class="profile__info">
 
@@ -38,7 +38,7 @@
                             <div class="element__trash-button-cup"></div>
                             <div class="element__trash-button-bin"></div>
                         </div>
-                        <img src="./images/1.jpeg" alt="красная поляна" class="element__image">
+                        <img src="# " alt="красная поляна" class="element__image">
                         <div class="element__container">
                             <h2 class="element__title">Красная Поляна</h2>
                             <button class="element__group-button">
@@ -90,14 +90,8 @@
         <div class="popup-container popup-container_picture">
             <button type="button" class="popup-container__close-button">
             </button>
-            <img src="./images/1.jpeg" alt="красная поляна" class="popup-container__image">
+            <img src="# " alt="красная поляна" class="popup-container__image">
             <p class="popup-container__text">Красная поняла</p>
         </div>
     </div>
-
-
-
-    <script src="./scripts/handlers.js"></script>
-    <script src="./scripts/cards.js"></script>
-    <script src="./scripts/validation.js"></script>
 </body>
