@@ -24,27 +24,27 @@ const Cards = (function () {
     const initialCards = [
         {
             name: 'Красная Поляна',
-            link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/images/1.jpeg'
+            link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/src/images/1.jpeg'
         },
         {
             name: 'Церковное озеро',
-            link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/images/2.jpeg'
+            link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/src/images/2.jpeg'
         },
         {
             name: 'Геленджик',
-            link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/images/3.jpeg'
+            link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/src/images/3.jpeg'
         },
         {
             name: 'Сафари Парк',
-            link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/images/4.jpeg'
+            link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/src/images/4.jpeg'
         },
         {
             name: 'Сочи',
-            link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/images/5.jpg'
+            link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/src/images/5.jpg'
         },
         {
             name: 'Адлер',
-            link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/images/6.jpg'
+            link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/src/images/6.jpg'
         }
     ];
 
