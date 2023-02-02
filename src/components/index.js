@@ -6,8 +6,9 @@ import { Handlers } from "./handlers";
 import { Cards } from "./cards";
 import { Validation } from "./validation";
 import { Modal } from "./modal";
+import { selectors } from './config';
 
-Validation.enableValidation();
+Validation.enableValidation(selectors);
 
 // теперь картинки можно импортировать,
 // вебпак добавит в переменные правильные пути

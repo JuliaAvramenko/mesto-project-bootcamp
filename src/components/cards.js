@@ -1,5 +1,6 @@
 import { selectors } from "./config";
 import { Modal } from "./modal";
+import { Validation } from "./validation";
 
 
 const Cards = (function () {
@@ -120,9 +121,7 @@ const Cards = (function () {
 
 
     // add new card
-
-    const submitCard = document.forms["form-card-add"];
-    submitCard.addEventListener("submit", (event) => {
+    addCardForm.addEventListener("submit", (event) => {
 
         const newCard = createCard(
             addCardFormNameInput.value,
@@ -130,8 +129,9 @@ const Cards = (function () {
         );
         cardsNode.prepend(newCard);
 
-        //очищение инпута 
-        addCardForm.reset()
+        //делаю кнопку неактивной после добавления карточки
+        Validation.resetFormValidation(addCardForm, selectors);
+
         event.preventDefault();
     })
 
