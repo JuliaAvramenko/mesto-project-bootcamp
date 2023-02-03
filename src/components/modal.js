@@ -1,10 +1,17 @@
 import { selectors } from "./config";
+import { Validation } from "./validation";
+
 
 export const Modal = (function () {
 
     //закрытие попапа 
     function closePopup(popupElem) {
         popupElem.classList.remove(selectors.popupOpenedClass);
+        // очищаем форму перед закрытием 
+        const includedForm = popupElem.querySelector(selectors.formSelector);
+        if (includedForm) {
+            Validation.resetFormValidation(includedForm, selectors);
+        }
     }
     // открытие попапа
     function openPopup(popupElem) {
