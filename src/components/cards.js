@@ -48,7 +48,7 @@ const Cards = (function () {
         }
     ];
 
-    function createCard(name, link) {
+    function createCard(name, link, addCardCallback) {
         // клонируем шаблон
         const newCard = cardElementTemplate.cloneNode(true);
         // меняем имя на переменную
@@ -58,7 +58,9 @@ const Cards = (function () {
         const newCardImage = newCard.querySelector(selectors.elementImageSelector);
         newCardImage.alt = name;
         newCardImage.src = link;
-        return newCard
+        newCardImage.onload = addCardCallback;
+
+        return newCard;
     }
 
     function likeButtonHandler(event) {
@@ -107,12 +109,15 @@ const Cards = (function () {
     })
 
     //const cardTemplate = createTemplate();
+    function addCardCallback(event) {
+        cardsNode.appendChild(event.target);
+    }
 
     // delete all element
     const oldElementList = document.querySelectorAll(selectors.elementSelector)
     oldElementList.forEach(item => item.remove())
 
-    const cardList = initialCards.map(card => createCard(card.name, card.link));
+    const cardList = initialCards.map(card => createCard(card.name, card.link, addCardCallback));
 
     // add initial cards to elements
 
