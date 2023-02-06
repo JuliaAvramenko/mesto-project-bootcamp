@@ -49,7 +49,14 @@ const Cards = (function () {
         }
     ];
 
+
+    function addCardCallback(event) {
+        console.log("fdgdfgdf");
+        cardsNode.appendChild(event.target);
+    }
+
     function createCard(name, link, addCardCallback) {
+        console.log("ggg" + name);
         // клонируем шаблон
         const newCard = cardElementTemplate.cloneNode(true);
         // меняем имя на переменную
@@ -57,9 +64,14 @@ const Cards = (function () {
         newCardTitle.textContent = name
         //меняем ссылку и alt 
         const newCardImage = newCard.querySelector(selectors.elementImageSelector);
+        //newCardImage = document.createElement("img");
         newCardImage.alt = name;
         newCardImage.src = link;
-        newCardImage.onload = addCardCallback;
+        //newCardImage.onload = addCardCallback;
+
+        // newCard.appendChild(newCardImage);
+
+        //return newCardImage
 
         return newCard;
     }
@@ -109,10 +121,7 @@ const Cards = (function () {
         )
     })
 
-    //const cardTemplate = createTemplate();
-    function addCardCallback(event) {
-        cardsNode.appendChild(event.target);
-    }
+
 
     // delete all element
     const oldElementList = document.querySelectorAll(selectors.elementSelector)
