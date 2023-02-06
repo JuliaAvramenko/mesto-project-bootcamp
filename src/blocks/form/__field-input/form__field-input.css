@@ -1,4 +1,4 @@
-.form__field-name {
+.form__field-input {
     padding: 0;
     max-width: 358px;
     min-height: 27px;
@@ -13,7 +13,7 @@
 }
 
 @media (max-width: 500px) {
-    .form__field-name {
+    .form__field-input {
         max-width: 238px;
         min-height: 27px;
     }

@@ -10,21 +10,6 @@ import { selectors } from './config';
 
 Validation.enableValidation(selectors);
 
-// теперь картинки можно импортировать,
-// вебпак добавит в переменные правильные пути
-///import logo from '../images/mesto-logo.svg';
-// import avatar from '../images/logo.jpeg';
 
-//const avatarImage = new URL('../images/logo.jpeg', import.meta.url);
 
-//const test = [
-//  { name: "my avatar", image: avatarImage }
-//];
-
-//const picturesProjectMesto = [
-// меняем исходные пути на переменные
-//{ name: 'Logo', link: logo },
-//{ name: 'Avatar Mesto', link: avatar },
-
-//];
 

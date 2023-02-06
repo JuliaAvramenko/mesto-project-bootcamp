@@ -60,10 +60,10 @@
             <form name="form-profile-edit" action="/profile/edit" class="form" novalidate>
                 <h2 class="form__title">Редактировать профиль</h2>
                 <input required minlength=2 maxlength=40 autocomplete="off" name="form-profile-name" type="text"
-                    class="form__field-name">
+                    class="form__field-input">
                 <span id="form-profile-name-error" class="error"></span>
                 <input required minlength=2 maxlength=200 autocomplete="off" name="form-profile-occupation" type="text"
-                    class="form__field-occupation">
+                    class="form__field-input">
                 <span id="form-profile-occupation-error" class="error"></span>
                 <button type="submit" class="form__submit-button">Сохранить</button>
             </form>
@@ -76,10 +76,10 @@
             <form name="form-card-add" action="/card/add" class="form" novalidate>
                 <h2 class="form__title">Новое место</h2>
                 <input required minlength=2 maxlength=30 autocomplete="off" name="form-add-name" type="text"
-                    placeholder="Название" class="form__field-name">
+                    placeholder="Название" class="form__field-input">
                 <span id="form-add-name-error" class="error"></span>
                 <input required autocomplete="off" name="form-add-link" type="url" placeholder="Ссылка на картинку"
-                    class="form__field-occupation">
+                    class="form__field-input">
                 <span id="form-add-link-error" class="error"></span>
 
                 <button type="submit" class="form__submit-button">Создать</button>

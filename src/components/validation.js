@@ -71,16 +71,16 @@ export const Validation = (function () {
     // 4 step  функция проверяет валидность формы и изменяет стили 
     function checkFormValidity(formElement, settings) {
         // находим инпуты в форме 
-        const inputNameList = formElement.querySelectorAll(settings.formFieldNameSelector);
-        const inputOccupationList = formElement.querySelectorAll(settings.formFieldOccupationSelector);
+        const inputList = formElement.querySelectorAll(settings.formFieldInputSelector);
+
         // проходимся по всем инпутам
         // validationStateList покажет, есть ли ошибка в каждом отдельном инпуте
-        const ValidationStateList = [...inputNameList, ...inputOccupationList].map(
+        const validationStateList = [...inputList].map(
             // проверяем валидность каждого инпута
             (inputElement) => checkInputValidity(formElement, inputElement, settings)
         );
         // 6 step была ли хоть одна ошибка - some вернет первый результат ошибки 
-        const isNotValid = [...ValidationStateList].some(state => state);
+        const isNotValid = [...validationStateList].some(state => state);
         // ищем кнопку button
         const submitButtonElement = formElement.querySelector(settings.formSubmitButtonSelector);
         // по умолчанию кнопка активна, но если форма не валидна , то кнопка не активна
@@ -100,8 +100,7 @@ export const Validation = (function () {
         // 2 step  проходим по каждой форме  
         [...forms].forEach((formElement) => {
             //в formElement находим все инпуты
-            const inputNameList = formElement.querySelectorAll(settings.formFieldNameSelector)
-            const inputOccupationList = formElement.querySelectorAll(settings.formFieldOccupationSelector);
+            const inputList = formElement.querySelectorAll(settings.formFieldInputSelector);
 
             // повесили обработчик события на форму
             formElement.addEventListener("submit", (evt) => {
@@ -114,7 +113,7 @@ export const Validation = (function () {
             toggleButtonState(submitButtonElement, false, settings);
 
             // 3 step  проходим по всем инпутам в определенной форме
-            [...inputNameList, ...inputOccupationList].forEach((inputElement) => {
+            [...inputList].forEach((inputElement) => {
                 // повесили обработчик на инпуты, но проверяем валидность всей формы
                 inputElement.addEventListener("input", (evt) => {
                     checkFormValidity(formElement, settings); // идем в функцию checkFormValidity

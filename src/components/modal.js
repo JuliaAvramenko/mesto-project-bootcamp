@@ -3,82 +3,71 @@ import { Validation } from "./validation";
 
 
 export const Modal = (function () {
-
     //закрытие попапа 
     function closePopup(popupElem) {
+        removeCloseHandlers(popupElem);
         popupElem.classList.remove(selectors.popupOpenedClass);
-        // очищаем форму перед закрытием 
-        const includedForm = popupElem.querySelector(selectors.formSelector);
-        if (includedForm) {
-            Validation.resetFormValidation(includedForm, selectors);
-        }
     }
     // открытие попапа
     function openPopup(popupElem) {
+        addCloseHandlers(popupElem);
         popupElem.classList.add(selectors.popupOpenedClass);
     }
 
-    // закрытие попапв нажатием на крестик 
-    const closeButtonList = document.querySelectorAll(selectors.popupContainerCloseButtonSelector)
-    closeButtonList.forEach(closeButton =>
-        closeButton.addEventListener("click", (event) => {
-            const popupElem = event.target.closest(selectors.popupSelector);
-            closePopup(popupElem);
-        })
-    )
+    function addCloseHandlers(popupElem) {
+        // add Esc handler
+        document.addEventListener("keydown", closeByEscape);
+        // add cross handler
+        const closeButton = popupElem.querySelector(selectors.popupContainerCloseButtonSelector);
+        closeButton.addEventListener("mousedown", closeByCross);
+        // add overlay handler
+        popupElem.addEventListener("mousedown", closeByOverlay);
+    }
 
-    // закрытие окна за пределами попапа
-    const popupList = document.querySelectorAll(selectors.popupSelector);
-    popupList.forEach(popupElement => {
+    function removeCloseHandlers(popupElem) {
+        // remove Esc handler
+        document.removeEventListener("keydown", closeByEscape);
+        // remove  cross handler
+        const closeButton = popupElem.querySelector(selectors.popupContainerCloseButtonSelector);
+        closeButton.removeEventListener("mousedown", closeByCross);
+        //remove overlay handler
+        popupElem.removeEventListener("mousedown", closeByOverlay);
+    }
+
+    //закрытие попапа нажатием на Esc
+    function closeByEscape(evt) {
+        console.log(123)
+        if (evt.key === 'Escape') {
+            const openedPopup = document.querySelector('.popup_opened');
+            closePopup(openedPopup);
+        }
+    }
+
+
+    // закрытие попапв нажатием на крестик 
+    function closeByCross(evt) {
+        const popupElem = evt.target.closest(selectors.popupSelector);
+        closePopup(popupElem);
+
+    }
+
+    function closeByOverlay(evt) {
         // Обрабатываем клик за пределами попапа: 
         // Source: https://misha.agency/javascript/klik-vne-elementa.html
-
+        const popupElement = evt.target;
         const popupContainer = popupElement.querySelector(selectors.popupContainerSelector);
+        const withinBoundaries = evt.composedPath().includes(popupContainer);
 
-        popupElement.addEventListener("click", (event) => {
-            const withinBoundaries = event.composedPath().includes(popupContainer);
+        if (!withinBoundaries) {
+            closePopup(popupElement);
 
-            if (!withinBoundaries) {
-                closePopup(popupElement);
-                // div.style.display = 'none'; // скрываем элемент т к клик был за его пределами
-            }
-        })
-
-
-        // Закрываем попап по нажатию Esc
-
-        //popupElement.addEventListener("keydown", (event) => {
-        // console.log("I was here");
-        //if (event.key === "s");
-        //const popupElem = event.target.closest(".popup");
-        //closePopup(popupElem);
-        // });
-    })
-
-    // Закрываем попапы по нажатию Esc
-    document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && !event.repeat) {
-            //console.log("I was here");
-            const popupList = document.querySelectorAll(selectors.popupSelector);
-            popupList.forEach(popupElement => {
-                //console.log(popupElement);
-                if ([...popupElement.classList].includes(selectors.popupOpenedClass)) {
-                    closePopup(popupElement)
-
-                };
-                // classList.проверяет есьть элемент в массива true - выключить, в другиз - ничего
-            })
         }
-        //if (event.key === "s");
-        //const popupElem = event.target.closest(".popup");
-        //closePopup(popupElem);
-    });
+    }
 
 
     return {
         openPopup: openPopup,
         closePopup: closePopup,
-
     }
-
 }());
+

@@ -1,4 +1,4 @@
-import { selectors } from "./config";
+import { selectors, elements } from "./config";
 import { Modal } from "./modal";
 import { Validation } from "./validation";
 
@@ -6,10 +6,8 @@ import { Validation } from "./validation";
 const Cards = (function () {
 
 
-    console.log("hello from cards");
-
-
-    const cardElementTemplate = document.querySelector(selectors.elementTemplateSelector).content;
+    const cardElementFragmentTemplate = document.querySelector(selectors.elementTemplateSelector).content;
+    const cardElementTemplate = cardElementFragmentTemplate.querySelector('.element');
     const cardsNode = document.querySelector(selectors.elementsSelector);
 
     // popup image
@@ -19,8 +17,8 @@ const Cards = (function () {
 
     // Add card form
     const addCardForm = document.forms["form-card-add"];
-    const addCardFormNameInput = addCardForm.querySelector(selectors.formFieldNameSelector);
-    const addCardFormLinkInput = addCardForm.querySelector(selectors.formFieldOccupationSelector);
+    const addCardFormNameInput = addCardForm.elements["form-add-name"];
+    const addCardFormLinkInput = addCardForm.elements["form-add-link"];
 
     const initialCards = [
         {
@@ -51,12 +49,11 @@ const Cards = (function () {
 
 
     function addCardCallback(event) {
-        console.log("fdgdfgdf");
+
         cardsNode.appendChild(event.target);
     }
 
     function createCard(name, link, addCardCallback) {
-        console.log("ggg" + name);
         // клонируем шаблон
         const newCard = cardElementTemplate.cloneNode(true);
         // меняем имя на переменную
@@ -64,64 +61,47 @@ const Cards = (function () {
         newCardTitle.textContent = name
         //меняем ссылку и alt 
         const newCardImage = newCard.querySelector(selectors.elementImageSelector);
-        //newCardImage = document.createElement("img");
+
         newCardImage.alt = name;
         newCardImage.src = link;
-        //newCardImage.onload = addCardCallback;
 
-        // newCard.appendChild(newCardImage);
 
-        //return newCardImage
+        // all listeners      
+        const trashButton = newCard.querySelector(".element__trash-button");
+        const cardImage = newCard.querySelector(".element__image");
+        const likeButton = newCard.querySelector(".element__group-button");
+        trashButton.addEventListener("click", handleTrashButton);
+        cardImage.addEventListener("click", handleClickImage);
+        likeButton.addEventListener("click", handleLikeButton);
 
         return newCard;
     }
 
-    function likeButtonHandler(event) {
+    function handleLikeButton(event) {
         event.target.classList.toggle(selectors.elementGroupButtonActiveClass)
         console.log("hi")
     }
 
-    function trashButtonHandler(event) {
+    function handleTrashButton(event) {
         const card = event.target.closest(selectors.elementSelector);
         cardsNode.removeChild(card);
     }
 
-    function clickImageHandler(event) {
+    function handleClickImage(event) {
         // get place name
         const cardPicture = event.target;
         const src = cardPicture.src;
         const alt = cardPicture.alt;
         const name = cardPicture.closest(selectors.elementSelector).querySelector(selectors.elementTitleSelector).textContent;
 
-        popupImage.classList.toggle(selectors.popupOpenedClass);
+        Modal.openPopup(popupImage);
 
         popupContainerText.textContent = name;
         popupContainerImage.src = src;
         popupContainerImage.alt = alt;
 
-        popupImage.querySelector(selectors.popupContainerCloseButtonSelector).addEventListener("click", (event) => {
-            popupContainerImage.src = ''
-        })
+
     }
-
-    document.addEventListener("DOMSubtreeModified", (event) => {
-        const likeButtonList = document.querySelectorAll(selectors.elementGroupButtonSelector);
-        likeButtonList.forEach(
-            likeButton => likeButton.addEventListener("click", likeButtonHandler)
-        )
-
-        const trashButtonList = document.querySelectorAll(selectors.elementTrashButtonSelector);
-        trashButtonList.forEach(
-            trashButton => trashButton.addEventListener("click", trashButtonHandler)
-        )
-
-        const openImageList = document.querySelectorAll(selectors.elementImageSelector);
-        openImageList.forEach(
-            openImage => openImage.addEventListener("click", clickImageHandler)
-        )
-    })
-
-
 
     // delete all element
     const oldElementList = document.querySelectorAll(selectors.elementSelector)
@@ -151,9 +131,8 @@ const Cards = (function () {
 
     const addButton = document.querySelector(selectors.profileAddButtonSelector);
     addButton.addEventListener("click", (event) => {
-        const form = document.forms["form-card-add"]
-        const popupElem = form.closest(selectors.popupSelector)
-        Modal.openPopup(popupElem)
+        Validation.resetFormValidation(addCardForm, selectors);
+        Modal.openPopup(elements.addPopup);
     })
     return {
 

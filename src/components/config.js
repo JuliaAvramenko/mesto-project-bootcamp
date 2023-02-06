@@ -1,7 +1,6 @@
 export const selectors = {
     //для validation.js
-    formFieldNameSelector: ".form__field-name",
-    formFieldOccupationSelector: ".form__field-occupation",
+    formFieldInputSelector: ".form__field-input",
     formSubmitButtonSelector: ".form__submit-button",
     formSubmitButtonInvalidClass: "form__submit-button_invalid",
     formValidationInvalidClass: "form_state_invalid",
@@ -19,6 +18,7 @@ export const selectors = {
 
     elementGroupButtonActiveClass: "element__group-button_active",
     popupOpenedClass: "popup_opened",
+    popupOpenedSelector: ".popup_opened",
 
     elementSelector: ".element",
     popupContainerCloseButtonSelector: ".popup-container__close-button",
@@ -31,4 +31,10 @@ export const selectors = {
     profileEditButtonSelector: ".profile__edit-button",
     popupContainerSelector: ".popup-container",
     formSelector: ".form",
+}
+
+export const elements = {
+    profilePopup: document.querySelector(".profile-popup"),
+    addPopup: document.querySelector(".add-popup"),
+    imagePopup: document.querySelector(".image-popup")
 }
