@@ -9,6 +9,7 @@
     background-image: url(../../../images/group-button-image.svg);
     background-repeat: no-repeat;
     background-size: contain;
+    margin-bottom: 3px;
 }
 
 .element__group-button:hover {

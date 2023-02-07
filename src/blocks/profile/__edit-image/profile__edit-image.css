@@ -1,0 +1,20 @@
+.profile__edit-image {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: flex-end;
+
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../../images/edit-button-image.svg);
+    background-size: 26px 26px;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    border: 0px;
+
+}
