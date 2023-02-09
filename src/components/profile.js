@@ -2,7 +2,7 @@ import { selectors, elements } from "./config";
 import { Modal } from "./modal";
 
 
-export const Handlers = (function () {
+export const Profile = (function () {
 
     const nameProfile = document.querySelector(selectors.profileTitleSelector);
     const occupationProfile = document.querySelector(selectors.profileSubtitleSelector);
@@ -12,8 +12,6 @@ export const Handlers = (function () {
     editButton.addEventListener('click', (event) => {
         const form = document.forms["form-profile-edit"]
         Modal.openPopup(elements.profilePopup);
-
-
 
         const nameForm = form.elements["form-profile-name"];
         const occupationForm = form.elements["form-profile-occupation"];
@@ -46,6 +44,28 @@ export const Handlers = (function () {
         // Не делаем HTTP запрос
         event.preventDefault();
     })
+
+    const profileAvatar = document.querySelector(".profile__avatar");
+    const profileEditImageButton = document.querySelector(".profile__edit-image");
+
+    function handleClickEditImageButton(evt) {
+        Modal.openPopup(elements.editImagePopup);
+
+    }
+
+
+
+    profileAvatar.addEventListener("mouseover", (evt) => {
+        profileEditImageButton.addEventListener("click", handleClickEditImageButton);
+        profileEditImageButton.classList.remove(selectors.profileEditImageClass);
+
+    })
+    profileAvatar.addEventListener("mouseout", (evt) => {
+        profileEditImageButton.removeEventListener("click", handleClickEditImageButton);
+        profileEditImageButton.classList.add(selectors.profileEditImageClass);
+    })
+
+
 
     return {
 

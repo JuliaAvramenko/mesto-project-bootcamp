@@ -31,10 +31,14 @@ export const selectors = {
     profileEditButtonSelector: ".profile__edit-button",
     popupContainerSelector: ".popup-container",
     formSelector: ".form",
+
+    profileEditImageClass: "profile__edit-image_hidden",
 }
 
 export const elements = {
     profilePopup: document.querySelector(".profile-popup"),
     addPopup: document.querySelector(".add-popup"),
-    imagePopup: document.querySelector(".image-popup")
+    imagePopup: document.querySelector(".image-popup"),
+    editImagePopup: document.querySelector(".edit-image-popup"),
+
 }

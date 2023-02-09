@@ -36,7 +36,6 @@ export const Modal = (function () {
 
     //закрытие попапа нажатием на Esc
     function closeByEscape(evt) {
-        console.log(123)
         if (evt.key === 'Escape') {
             const openedPopup = document.querySelector('.popup_opened');
             closePopup(openedPopup);
@@ -54,8 +53,9 @@ export const Modal = (function () {
     function closeByOverlay(evt) {
         // Обрабатываем клик за пределами попапа: 
         // Source: https://misha.agency/javascript/klik-vne-elementa.html
-        const popupElement = evt.target;
+        const popupElement = evt.target.closest(selectors.popupOpenedSelector);
         const popupContainer = popupElement.querySelector(selectors.popupContainerSelector);
+
         const withinBoundaries = evt.composedPath().includes(popupContainer);
 
         if (!withinBoundaries) {

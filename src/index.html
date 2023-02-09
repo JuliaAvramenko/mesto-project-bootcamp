@@ -18,7 +18,7 @@
             <section class="profile">
                 <div class="profile__main-info">
                     <div class="profile__avatar">
-                        <button class="profile__edit-image"></button>
+                        <button class="profile__edit-image profile__edit-image_hidden"></button>
                         <img src="<%=require('./images/logo.jpeg')%>" alt="бирка" class="profile__image ">
                     </div>
 
@@ -75,7 +75,7 @@
             </form>
         </div>
     </div>
-    <div class="popup add-popup popup_opened">
+    <div class="popup add-popup">
         <div class="popup-container popup-container_parameters">
             <button type="button" class="popup-container__close-button">
             </button>
@@ -101,14 +101,14 @@
         </div>
     </div>
 
-    <div class="popup edit-image-popup popup_opened_">
+    <div class="popup edit-image-popup">
         <div class="popup-container popup-container_size">
             <button type="button" class="popup-container__close-button">
             </button>
             <form name="form-card-add" action="/card/add" class="form" novalidate>
                 <h2 class="form__title">Обновить аватар</h2>
-                <input required autocomplete="off" name="form-add-link" type="url" placeholder="Ссылка на картинку"
-                    class="form__field-input">
+                <input required autocomplete="off" name="form-edit-image-link" type="url"
+                    placeholder="Ссылка на картинку" class="form__field-input">
                 <span id="form-edit-image-link-error" class="error"></span>
                 <button type="submit" class="form__submit-button">Сохранить</button>
             </form>
