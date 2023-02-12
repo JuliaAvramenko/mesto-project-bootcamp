@@ -19,16 +19,16 @@
                 <div class="profile__main-info">
                     <div class="profile__avatar">
                         <button class="profile__edit-image profile__edit-image_hidden"></button>
-                        <img src="<%=require('./images/logo.jpeg')%>" alt="бирка" class="profile__image ">
+                        <img src="# " alt="бирка" class="profile__image ">
                     </div>
 
                     <div class="profile__info">
 
                         <div class="profile__container">
-                            <h1 class="profile__title">Jul&#8209;liA&nbsp;Авраменко</h1>
+                            <h1 class="profile__title"></h1>
                             <button type="button" class="profile__edit-button"></button>
                         </div>
-                        <p class="profile__subtitle">Шопоголик на отдыхе</p>
+                        <p class="profile__subtitle"></p>
                     </div>
                 </div>
                 <button class="profile__add-button"></button>
@@ -36,7 +36,7 @@
             </section>
             <section class="elements">
                 <template class="element-template">
-                    <article class="element">
+                    <article id="" class="element">
                         <div class="element__trash-button element__trash-button_invalid">
                             <div class="element__trash-button-cup"></div>
                             <div class="element__trash-button-bin"></div>
@@ -46,7 +46,7 @@
                             <h2 class="element__title">Красная Поляна</h2>
                             <div class="element__likes">
                                 <button class="element__group-button"></button>
-                                <div class="element__counter">0</div>
+                                <div class="element__counter"></div>
 
                             </div>
                         </div>
@@ -97,7 +97,7 @@
             <button type="button" class="popup-container__close-button">
             </button>
             <img src="# " alt="красная поляна" class="popup-container__image">
-            <p class="popup-container__text">Красная поняла</p>
+            <p class="popup-container__text">Красная поляна</p>
         </div>
     </div>
 
@@ -105,7 +105,7 @@
         <div class="popup-container popup-container_size">
             <button type="button" class="popup-container__close-button">
             </button>
-            <form name="form-card-add" action="/card/add" class="form" novalidate>
+            <form name="form-profile-image-change" action="/card/add" class="form" novalidate>
                 <h2 class="form__title">Обновить аватар</h2>
                 <input required autocomplete="off" name="form-edit-image-link" type="url"
                     placeholder="Ссылка на картинку" class="form__field-input">

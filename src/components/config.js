@@ -24,13 +24,18 @@ export const selectors = {
     popupContainerCloseButtonSelector: ".popup-container__close-button",
     elementGroupButtonSelector: ".element__group-button",
     elementTrashButtonSelector: ".element__trash-button",
+    elementTrashButtonInvalidClass: "element__trash-button_invalid",
+    elementCounterSelector: ".element__counter",
     profileAddButtonSelector: ".profile__add-button",
 
     profileTitleSelector: ".profile__title",
     profileSubtitleSelector: ".profile__subtitle",
     profileEditButtonSelector: ".profile__edit-button",
+    profileImageSelector: ".profile__image",
     popupContainerSelector: ".popup-container",
     formSelector: ".form",
+    formProfileImageChangeSelector: ".form-profile-image-change",
+    formProfileEditSelector: ".form-profile-edit",
 
     profileEditImageClass: "profile__edit-image_hidden",
 }

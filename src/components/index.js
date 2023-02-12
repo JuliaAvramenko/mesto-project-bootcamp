@@ -7,8 +7,22 @@ import { Cards } from "./cards";
 import { Validation } from "./validation";
 import { Modal } from "./modal";
 import { selectors } from './config';
+import { Api } from "./api";
+
+
+
+function check() {
+    Api.getProfile(
+        (data) => { console.log(data) },
+        (error) => { console.log(error) }
+    );
+}
+
 
 Validation.enableValidation(selectors);
+
+
+
 
 
 

@@ -1,5 +1,6 @@
 import { selectors, elements } from "./config";
 import { Modal } from "./modal";
+import { Api, MyInformation } from "./api";
 
 
 export const Profile = (function () {
@@ -7,6 +8,7 @@ export const Profile = (function () {
     const nameProfile = document.querySelector(selectors.profileTitleSelector);
     const occupationProfile = document.querySelector(selectors.profileSubtitleSelector);
     const editButton = document.querySelector(selectors.profileEditButtonSelector);
+    const profileImage = document.querySelector(selectors.profileImageSelector);
 
 
     editButton.addEventListener('click', (event) => {
@@ -26,16 +28,28 @@ export const Profile = (function () {
     })
 
 
-    const profileForm = document.querySelector(selectors.formSelector)
+    const profileForm = document.forms["form-profile-edit"];
     profileForm.addEventListener("submit", (event) => {
-
         // Получаем значения инпутов
         const nameInput = profileForm.elements["form-profile-name"];
         const occupationInput = profileForm.elements["form-profile-occupation"];
-
         // Делаем что нибудь с инпутами
-        nameProfile.textContent = nameInput.value;
-        occupationProfile.textContent = occupationInput.value;
+        const editProfileSubmitButton = profileForm.querySelector(selectors.formSubmitButtonSelector);
+        editProfileSubmitButton.textContent = "Сохранение..."
+
+        Api.patchProfile(
+            nameInput.value,
+            occupationInput.value,
+            (profile) => {
+                nameProfile.textContent = profile.name;
+                occupationProfile.textContent = profile.about;
+                editProfileSubmitButton.textContent = "Сохранить";
+            },
+            (error) => {
+                editProfileSubmitButton.textContent = "Сохранить";
+                console.log(`Профиль не удалось обновить ${error}`)
+            }
+        )
 
         // Закрываем форму
 
@@ -65,10 +79,48 @@ export const Profile = (function () {
         profileEditImageButton.classList.add(selectors.profileEditImageClass);
     })
 
-
-
-    return {
-
+    const myProfileInfo = {
+        name: "Jul&#8209;liA&nbsp;Авраменко",
+        occupation: "Шопоголик на отдыхе",
+        link: "https://images.unsplash.com/photo-1561731172-9d906d7b13bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80"
 
     }
+
+    function showProfile(profile) {
+        console.log(MyInformation.myProfile);
+
+
+        nameProfile.textContent = profile.name;
+        occupationProfile.textContent = profile.about;
+        profileImage.src = profile.avatar;
+
+    }
+
+
+    Api.getProfile(showProfile, (error) => {
+        console.log(`Функция showProfile ${error}`)
+    });
+
+    const profileEditAvatarForm = document.forms["form-profile-image-change"];
+    profileEditAvatarForm.addEventListener("submit", (event) => {
+        const linkInput = profileEditAvatarForm.elements["form-edit-image-link"];
+
+        const editProfileImageSubmitButton = profileEditAvatarForm.querySelector(selectors.formSubmitButtonSelector);
+        editProfileImageSubmitButton.textContent = "Сохранение..."
+
+        Api.patchProfileAvatar(linkInput.value,
+            (profile) => {
+                profileImage.src = profile.avatar;
+                editProfileImageSubmitButton.textContent = "Сохранить";
+            },
+            (error) => {
+                editProfileImageSubmitButton.textContent = "Сохранить";
+                console.log(`Ошибка при обновлении аватара ${error}`)
+            }
+        )
+        Modal.closePopup(elements.editImagePopup);
+        event.preventDefault();
+    })
+
+
 }());

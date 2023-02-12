@@ -20,7 +20,7 @@ export const Validation = (function () {
     }
 
     function toggleButtonState(buttonElement, toActive, settings) {
-        console.log("I change state Button");
+
         if (toActive) {
             // Enable button
             buttonElement.disabled = false;
@@ -101,13 +101,6 @@ export const Validation = (function () {
         [...forms].forEach((formElement) => {
             //в formElement находим все инпуты
             const inputList = formElement.querySelectorAll(settings.formFieldInputSelector);
-
-            // повесили обработчик события на форму
-            formElement.addEventListener("submit", (evt) => {
-                evt.preventDefault();
-                console.log("отправилась");
-
-            });
 
             const submitButtonElement = formElement.querySelector(settings.formSubmitButtonSelector);
             toggleButtonState(submitButtonElement, false, settings);
