@@ -8,246 +8,101 @@ export const MyInformation = (function () {
     }
 }());
 
-export const Api = (function () {
-    const HOST_API = 'https://nomoreparties.co';
-    const COHORT_ID = 'wbf-cohort-5';
+export const config = {
+    baseUrl: "https://nomoreparties.co/v1/wbf-cohort-5",
+    headers: {
+        authorization: '68a0d7e3-249b-4c9f-8ef2-b362819ec551',
+        'Content-Type': 'application/json',
+    },
+}
 
-    const CARDS_ENDPOINT = `v1/${COHORT_ID}/cards`
-    const PROFILE_ENDPOINT = `v1/${COHORT_ID}/users`
-    const AUTHORIZATION = '68a0d7e3-249b-4c9f-8ef2-b362819ec551'
+export const Api = (function (config) {
+
+    const CARDS_ENDPOINT = `cards`
+    const PROFILE_ENDPOINT = `users`
+
+    function checkResponse(response) {
+        if (response.ok) {
+            return response.json()
+        }
+        return Promise.reject(`Что-то пошло не так: ${response.status}`)
+    }
 
     // Загрузка информации о пользователе с сервера
-    function getProfile(callback, error) {
-        fetch(`${HOST_API}/${PROFILE_ENDPOINT}/me`, {
-            headers: {
-                authorization: AUTHORIZATION
-            }
-        })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Что-то пошло не так: ${res.status}`);
-            })
-            .then((profile) => {
-                MyInformation.myProfile = profile;
-                callback(profile);
-            })
-            .catch((err) => {
-                error(err);
-            })
-            .finally(() => {
-                console.log("finally");
-            })
+    async function getProfile() {
+        // TODO: save answer to MyInformation.myProfile = profile;
+        const response = await fetch(`${config.baseUrl}/users/me`, { headers: config.headers });
+        return checkResponse(response);
     }
 
     //  Загрузка карточек с сервера
-    function getCards(callback, error) {
-        fetch(`${HOST_API}/${CARDS_ENDPOINT}`, {
-            headers: {
-                authorization: AUTHORIZATION
-            }
-        })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Что-то пошло не так: ${res.status}`);
-            })
-            .then((cards) => {
-                callback(cards);
-                //console.log(result);
-            })
-            .catch((err) => {
-                error(err);
-            })
-            .finally(() => {
-                console.log("finally");
-            })
+    async function getCards() {
+        const response = await fetch(`${config.baseUrl}/cards`, { headers: config.headers });
+        return checkResponse(response);
     }
     // Редактирование профиля
 
-    function patchProfile(name, about, callback, error) {
-        fetch(`${HOST_API}/${PROFILE_ENDPOINT}/me`, {
+    async function patchProfile(name, about) {
+        const response = await fetch(`${config.baseUrl}/users/me`, {
             method: "PATCH",
-            headers: {
-                authorization: AUTHORIZATION,
-                "Content-Type": "application/json"
-            },
+            headers: config.headers,
             body: JSON.stringify({
                 name: name,
                 about: about
             })
-        })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Что-то пошло не так: ${res.status}`);
-            })
-            .then((profile) => {
-                callback(profile);
-            })
-            .catch((err) => {
-                error(err);
-            })
-            .finally(() => {
-                console.log("finally patch");
-
-            })
+        });
+        return checkResponse(response);
     }
 
     // Добавление новой карточки
-    function postCards(name, link, callback, error) {
-        fetch(`${HOST_API}/${CARDS_ENDPOINT}`, {
+    async function postCards(name, link) {
+        const response = await fetch(`${config.baseUrl}/cards`, {
             method: "POST",
             body: JSON.stringify({
                 name: name,
                 link: link
             }),
-            headers: {
-                authorization: AUTHORIZATION,
-                "Content-Type": "application/json"
-            }
-        })
-            .then((res) => {
-                console.log(res);
-                if (res.ok) {
-                    return res.json()
-                }
-
-                return Promise.reject(`Что-то пошло не так: ${res.status}`);
-                // return Promise.reject(res.text());
-            })
-            .then((cards) => {
-                callback(cards);
-                //console.log(result);
-            })
-            .catch((err) => {
-                error(err);
-                /*
-                err.then((data) => {
-                    error(data);
-                })
-                */
-            })
-            .finally(() => {
-                console.log("finally");
-            })
+            headers: config.headers
+        });
+        return checkResponse(response);
     }
     // Удаление карточки
-    function deleteCard(id, callback, error) {
-        fetch(`${HOST_API}/${CARDS_ENDPOINT}/${id}`, {
+    async function deleteCard(id) {
+        const response = await fetch(`${config.baseUrl}/cards/${id}`, {
             method: "DELETE",
-            headers: {
-                authorization: AUTHORIZATION
-            }
-
-        })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Что-то пошло не так: ${res.status}`);
-            })
-            .then((cards) => {
-                callback(cards);
-                //console.log(result);
-            })
-            .catch((err) => {
-                error(err);
-            })
-            .finally(() => {
-                console.log("finally DELETE");
-            })
-
+            headers: config.headers
+        });
+        return checkResponse(response);
     }
 
     // Постановка лайка
-    function putLike(id, callback, error) {
-        fetch(`${HOST_API}/${CARDS_ENDPOINT}/likes/${id}`, {
+    async function putLike(id) {
+        const response = await fetch(`${config.baseUrl}/cards/likes/${id}`, {
             method: "PUT",
-
-            headers: {
-                authorization: AUTHORIZATION
-            }
-
-        })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Что-то пошло не так: ${res.status}`);
-            })
-            .then((cards) => {
-                callback(cards);
-                //console.log(result);
-            })
-            .catch((err) => {
-                error(err);
-            })
-            .finally(() => {
-                console.log("finally PUTlikes");
-            })
+            headers: config.headers
+        });
+        return checkResponse(response);
     }
 
     //Удаление лайка
-    function deleteLike(id, callback, error) {
-        fetch(`${HOST_API}/${CARDS_ENDPOINT}/likes/${id}`, {
+    async function deleteLike(id) {
+        const response = await fetch(`${config.baseUrl}/cards/likes/${id}`, {
             method: "DELETE",
-
-            headers: {
-                authorization: AUTHORIZATION
-            }
-
-        })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Что-то пошло не так: ${res.status}`);
-            })
-            .then((cards) => {
-                callback(cards);
-                //console.log(result);
-            })
-            .catch((err) => {
-                error(err);
-            })
-            .finally(() => {
-                console.log("finally DELETElikes");
-            })
+            headers: config.headers
+        });
+        return checkResponse(response);
     }
 
     // Обновление аватара пользователя
-    function patchProfileAvatar(link, callback, error) {
-        fetch(`${HOST_API}/${PROFILE_ENDPOINT}/me/avatar`, {
+    async function patchProfileAvatar(link) {
+        const response = await fetch(`${config.baseUrl}/users/me/avatar`, {
             method: "PATCH",
-            headers: {
-                authorization: AUTHORIZATION,
-                "Content-Type": "application/json"
-            },
+            headers: config.headers,
             body: JSON.stringify({
                 avatar: link
             })
-
-        })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Что-то пошло не так: ${res.status}`);
-            })
-            .then((profile) => {
-                callback(profile);
-            })
-            .catch((err) => {
-                error(err);
-            })
-            .finally(() => {
-                console.log("finally patchAvatar");
-
-            })
+        });
+        return checkResponse(response);
     }
 
 
@@ -263,4 +118,4 @@ export const Api = (function () {
 
     }
 
-}())
+})(config)

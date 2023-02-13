@@ -9,51 +9,48 @@ export const Profile = (function () {
     const occupationProfile = document.querySelector(selectors.profileSubtitleSelector);
     const editButton = document.querySelector(selectors.profileEditButtonSelector);
     const profileImage = document.querySelector(selectors.profileImageSelector);
-
+    // Profile Form
+    const profileForm = document.forms["form-profile-edit"];
+    const nameFormInput = profileForm.elements["form-profile-name"];
+    const occupationFormInput = profileForm.elements["form-profile-occupation"];
 
     editButton.addEventListener('click', (event) => {
-        const form = document.forms["form-profile-edit"]
         Modal.openPopup(elements.profilePopup);
 
-        const nameForm = form.elements["form-profile-name"];
-        const occupationForm = form.elements["form-profile-occupation"];
-
-        nameForm.value = nameProfile.textContent;
-        occupationForm.value = occupationProfile.textContent;
+        nameFormInput.value = nameProfile.textContent;
+        occupationFormInput.value = occupationProfile.textContent;
 
         const eventInput = new Event("input");
 
-        nameForm.dispatchEvent(eventInput);
-        occupationForm.dispatchEvent(eventInput);
+        nameFormInput.dispatchEvent(eventInput);
+        occupationFormInput.dispatchEvent(eventInput);
     })
 
 
-    const profileForm = document.forms["form-profile-edit"];
+
     profileForm.addEventListener("submit", (event) => {
-        // Получаем значения инпутов
-        const nameInput = profileForm.elements["form-profile-name"];
-        const occupationInput = profileForm.elements["form-profile-occupation"];
         // Делаем что нибудь с инпутами
         const editProfileSubmitButton = profileForm.querySelector(selectors.formSubmitButtonSelector);
         editProfileSubmitButton.textContent = "Сохранение..."
 
-        Api.patchProfile(
-            nameInput.value,
-            occupationInput.value,
-            (profile) => {
+        Api.patchProfile(nameFormInput.value, occupationFormInput.value)
+            .then((profile) => {
                 nameProfile.textContent = profile.name;
                 occupationProfile.textContent = profile.about;
-                editProfileSubmitButton.textContent = "Сохранить";
-            },
-            (error) => {
-                editProfileSubmitButton.textContent = "Сохранить";
+                // Закрываем форму
+                Modal.closePopup(elements.profilePopup);
+            })
+            .catch((error) => {
+
                 console.log(`Профиль не удалось обновить ${error}`)
-            }
-        )
+            })
+            .finally(() => {
+                editProfileSubmitButton.textContent = "Сохранить";
+            })
 
-        // Закрываем форму
+        
 
-        Modal.closePopup(elements.profilePopup);
+
 
         // Не делаем HTTP запрос
         event.preventDefault();
@@ -96,11 +93,6 @@ export const Profile = (function () {
 
     }
 
-
-    Api.getProfile(showProfile, (error) => {
-        console.log(`Функция showProfile ${error}`)
-    });
-
     const profileEditAvatarForm = document.forms["form-profile-image-change"];
     profileEditAvatarForm.addEventListener("submit", (event) => {
         const linkInput = profileEditAvatarForm.elements["form-edit-image-link"];
@@ -108,19 +100,23 @@ export const Profile = (function () {
         const editProfileImageSubmitButton = profileEditAvatarForm.querySelector(selectors.formSubmitButtonSelector);
         editProfileImageSubmitButton.textContent = "Сохранение..."
 
-        Api.patchProfileAvatar(linkInput.value,
-            (profile) => {
+        Api.patchProfileAvatar(linkInput.value)
+            .then((profile) => {
                 profileImage.src = profile.avatar;
-                editProfileImageSubmitButton.textContent = "Сохранить";
-            },
-            (error) => {
-                editProfileImageSubmitButton.textContent = "Сохранить";
+                Modal.closePopup(elements.editImagePopup);
+            })
+            .catch((error) => {
                 console.log(`Ошибка при обновлении аватара ${error}`)
-            }
-        )
-        Modal.closePopup(elements.editImagePopup);
+            })
+            .finally(() => {
+                editProfileImageSubmitButton.textContent = "Сохранить";
+
+            })
+
         event.preventDefault();
     })
-
+    return {
+        showProfile: showProfile,
+    }
 
 }());

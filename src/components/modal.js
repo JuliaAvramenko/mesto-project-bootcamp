@@ -3,7 +3,7 @@ import { Validation } from "./validation";
 
 
 export const Modal = (function () {
-    //закрытие попапа 
+    // закрытие попапа 
     function closePopup(popupElem) {
         removeCloseHandlers(popupElem);
         popupElem.classList.remove(selectors.popupOpenedClass);
@@ -19,7 +19,7 @@ export const Modal = (function () {
         document.addEventListener("keydown", closeByEscape);
         // add cross handler
         const closeButton = popupElem.querySelector(selectors.popupContainerCloseButtonSelector);
-        closeButton.addEventListener("mousedown", closeByCross);
+        closeButton.addEventListener("click", closeByCross);
         // add overlay handler
         popupElem.addEventListener("mousedown", closeByOverlay);
     }
@@ -29,7 +29,7 @@ export const Modal = (function () {
         document.removeEventListener("keydown", closeByEscape);
         // remove  cross handler
         const closeButton = popupElem.querySelector(selectors.popupContainerCloseButtonSelector);
-        closeButton.removeEventListener("mousedown", closeByCross);
+        closeButton.removeEventListener("click", closeByCross);
         //remove overlay handler
         popupElem.removeEventListener("mousedown", closeByOverlay);
     }

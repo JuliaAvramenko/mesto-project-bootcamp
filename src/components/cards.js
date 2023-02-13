@@ -2,6 +2,7 @@ import { selectors, elements } from "./config";
 import { Modal } from "./modal";
 import { Validation } from "./validation";
 import { Api, MyInformation } from "./api";
+import { Profile } from "./profile";
 
 
 const Cards = (function () {
@@ -21,7 +22,7 @@ const Cards = (function () {
     const addCardFormNameInput = addCardForm.elements["form-add-name"];
     const addCardFormLinkInput = addCardForm.elements["form-add-link"];
 
-    let initialCards = [
+    const initialCards = [
         {
             name: 'Красная Поляна',
             link: 'https://github.com/JuliaAvramenko/mesto-project-bootcamp/raw/main/src/images/1.jpeg'
@@ -68,9 +69,8 @@ const Cards = (function () {
         newCardImage.alt = card.name;
         newCardImage.src = card.link;
 
-        // add image click listener      
-        const cardImage = newCard.querySelector(".element__image");
-        cardImage.addEventListener("click", handleClickImage);
+        // add image click listener             
+        newCardImage.addEventListener("click", handleClickImage);
 
 
         // показать trashbutton или нет 
@@ -101,58 +101,52 @@ const Cards = (function () {
 
     function handleLikeButton(event) {
         const cardNodeElement = event.target.closest(selectors.elementSelector);
+        const nodeCounter = cardNodeElement.querySelector(selectors.elementCounterSelector);
+        const likeButton = cardNodeElement.querySelector(selectors.elementGroupButtonSelector);
         const id = cardNodeElement.id;
         if (event.target.classList.contains(selectors.elementGroupButtonActiveClass)) {
-            Api.deleteLike(
-                id,
-                (cardData) => {
-                    removeLikesNumberAndUnpaintHeart(cardNodeElement, cardData);
-                },
-                (error) => {
+            Api.deleteLike(id)
+                .then((cardData) => {
+                    removeLikesNumberAndUnpaintHeart(nodeCounter, likeButton, cardData)
+                })
+                .catch((error) => {
                     console.log(`Функция removeLikeButton ${error}`)
-                }
-            )
+                })
 
         } else {
 
-            Api.putLike(
-                id,
-                (cardData) => {
-                    showLikesNumberAndPaintHeart(cardNodeElement, cardData);
-                },
-                (error) => {
+            Api.putLike(id)
+                .then((cardData) => {
+                    showLikesNumberAndPaintHeart(nodeCounter, likeButton, cardData)
+                })
+                .catch((error) => {
                     console.log(`Функция likeButton ${error}`)
-                }
-            )
+                })
         }
-
     }
 
-    function showLikesNumberAndPaintHeart(cardNodeElement, cardData) {
-        const likeButton = cardNodeElement.querySelector(selectors.elementGroupButtonSelector)
+    function showLikesNumberAndPaintHeart(nodeCounter, likeButton, cardData) {
         likeButton.classList.add(selectors.elementGroupButtonActiveClass);
         const showLikesNumber = cardData.likes.length;
-        const nodeCounter = cardNodeElement.querySelector(selectors.elementCounterSelector)
         nodeCounter.textContent = showLikesNumber;
     }
 
-    function removeLikesNumberAndUnpaintHeart(cardNodeElement, cardData) {
-        const likeButton = cardNodeElement.querySelector(selectors.elementGroupButtonSelector)
+    function removeLikesNumberAndUnpaintHeart(nodeCounter, likeButton, cardData) {
         likeButton.classList.remove(selectors.elementGroupButtonActiveClass);
         const showLikesNumber = cardData.likes.length;
-        const nodeCounter = cardNodeElement.querySelector(selectors.elementCounterSelector)
         nodeCounter.textContent = showLikesNumber;
     }
 
     //поставить колич-ао лайков, покрасить сердце
     function handleTrashButton(event) {
         const cardNodeElement = event.target.closest(selectors.elementSelector);
-
-        Api.deleteCard(cardNodeElement.id, (card) => {
-            cardsNode.removeChild(cardNodeElement);
-        }, (error) => {
-            console.log(`Ошибка при удалении карточки ${error}`);
-        })
+        Api.deleteCard(cardNodeElement.id)
+            .then((card) => {
+                cardsNode.removeChild(cardNodeElement);
+            })
+            .catch((error) => {
+                console.log(`Ошибка при удалении карточки ${error}`)
+            })
     }
 
     function handleClickImage(event) {
@@ -172,7 +166,6 @@ const Cards = (function () {
     }
 
     function showCards(cards) {
-        console.log(cards[0]);
         // delete all element
         const oldElementList = document.querySelectorAll(selectors.elementSelector);
         oldElementList.forEach(item => item.remove());
@@ -183,10 +176,19 @@ const Cards = (function () {
         cardList.forEach(item => cardsNode.appendChild(item));
     }
 
-    //showCards(initialCards);
-    Api.getCards(showCards, (error) => {
-        console.log(`Функция showCards ${error}`)
-    });
+    Promise.all([Api.getProfile(), Api.getCards()])
+        // тут деструктурируете ответ от сервера, чтобы было понятнее, что пришло
+        .then(([userData, cards]) => {
+            // тут установка данных пользователя            
+            MyInformation.myProfile = userData;
+            Profile.showProfile(userData);
+            // и тут отрисовка карточек
+            showCards(cards);
+        })
+        .catch((error) => {
+            console.log(`Функция showCards ${error}`)
+        });
+
 
 
     // add new card
@@ -196,20 +198,23 @@ const Cards = (function () {
 
         Api.postCards(
             addCardFormNameInput.value,
-            addCardFormLinkInput.value,
-            (card) => {
-                createCardSubmitButton.textContent = "Создать";
+            addCardFormLinkInput.value)
+            .then((card) => {
                 const newCardNodeElement = createCard(card);
                 cardsNode.prepend(newCardNodeElement);
+                Validation.resetFormValidation(addCardForm, selectors);
+                Modal.closePopup(elements.addPopup);
+            })
+            .catch((error) => {
 
-            },
-            (error) => {
-                createCardSubmitButton.textContent = "Создать";
                 console.log(`Ошибка добавления карточки ${error}`)
-            }
-        );
+            })
+            .finally(() => {
+                createCardSubmitButton.textContent = "Создать";
 
-        Validation.resetFormValidation(addCardForm, selectors);
+            })
+
+
         event.preventDefault();
     })
 

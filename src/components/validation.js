@@ -33,7 +33,6 @@ export const Validation = (function () {
     }
 
     function showError(formElement, inputElement, settings) {
-        console.log(`I showError ${formElement.name} ${inputElement.name}`);
 
         const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
 
@@ -43,8 +42,6 @@ export const Validation = (function () {
     }
 
     function hideError(formElement, inputElement, settings) {
-        console.log(`I hideError ${formElement.name} ${inputElement.name}`);
-
         const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
 
         inputElement.classList.remove(settings.formValidationInvalidClass);
