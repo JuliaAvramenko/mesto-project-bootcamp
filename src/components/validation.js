@@ -15,8 +15,6 @@ export const Validation = (function () {
         })
         // деактивируем кнопку
         toggleButtonState(submitButton, false, settings);
-
-
     }
 
     function toggleButtonState(buttonElement, toActive, settings) {
